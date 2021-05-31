@@ -1,0 +1,5 @@
+export const Hello='Hello'
+export const AllData='All Data'
+export const Delete='Delete'
+export const Add='Add'
+export const Edit='Edit'
