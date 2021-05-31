@@ -24,10 +24,9 @@ function HomePage() {
     
     const dispatch = useDispatch();
 
-    const [showData,setShowData]=useState([]);
+    const [showData,setShowData]=useState();
 
     // dispatch(Hell({id:1}));
-    
 
     useEffect(()=>{
         axios.get('https://reqres.in/api/users').then(
@@ -45,6 +44,7 @@ function HomePage() {
                     return obj;
                 })
                 dispatch(takeEntireData(dataTemp))
+                setShowData(dataTemp);
                 // setArr(temp)
             }
         )
