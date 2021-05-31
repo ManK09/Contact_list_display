@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { nanoid } from 'nanoid'
 import {Redirect, Link} from 'react-router-dom'
 import axios from 'axios'
-import {deleteEntry, Hell, takeEntireData} from '../redux/actions' 
+import {deleteEntry, takeEntireData} from '../redux/actions'
 
 const opacity={
     cursor:"pointer"
@@ -44,7 +44,6 @@ function HomePage() {
                     return obj;
                 })
                 dispatch(takeEntireData(dataTemp))
-                setShowData(dataTemp);
                 // setArr(temp)
             }
         )
@@ -58,7 +57,7 @@ function HomePage() {
                 return val.username?.toLowerCase().match(search.toLowerCase()) || val.name?.toLowerCase().match(search.toLowerCase()) || val.email?.toLowerCase().match(search.toLowerCase()) || val.phone?.toLowerCase().match(search.toLowerCase());
             }));
         }
-    },[search])
+    },[search,data])
 
     // console.log("Hey",showData,"batao")
 
