@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {Input, Button} from 'antd'
@@ -15,8 +15,13 @@ export default function EditUser() {
     const dispatch = useDispatch();
     const data=useSelector(state=>state?.data)
 
-    const idx=data.map(x => {return x.id}).indexOf(key)
+    const idx=data?.map(x => {return x.id}).indexOf(key)
+    //console.log("Acha",idx);
 
+    // useEffect(()=>{
+    //     const temp=data?.map(x => {return x.id}).indexOf(key);
+    //     setIdx(temp);
+    // },[])
 
 
     const [flag,setFlag]= useState(0);
@@ -57,6 +62,15 @@ export default function EditUser() {
     // const [userName,setUserName]= useState("");
     // const [email,setEmail] = useState("");
     // const [phone,setPhone] = useState("");
+
+    // console.log(idx)
+    // if(idx)
+    // {
+    //     setName(data[idx].name);
+    //     setUserName(data[idx].username);
+    //     setEmail(data[idx].email);
+    //     setPhone(data[idx].phone);
+    // }
 
     if(flag) return <Redirect to='/homepage' exact />
     return (
