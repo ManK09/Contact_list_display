@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react'
 
 import 'antd/dist/antd.css';
-import { List, Modal,Form,Input, Divider,Button,Space, Table } from 'antd';
+import { Modal,Input,Button,Space, Table } from 'antd';
 import {useSelector, useDispatch} from 'react-redux'
-import {PlusCircleFilled, SaveOutlined } from '@ant-design/icons';
 import { nanoid } from 'nanoid'
 import {Redirect, Link} from 'react-router-dom'
 import axios from 'axios'
@@ -19,9 +18,13 @@ function HomePage() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [deleteIndex,setDeleteIndex]=useState(-1);
     const data=useSelector(state=>state?.data)
-    //console.log("HIii",data);
+    const [search,setSearch] = useState("");
+
+    console.log("HIii",data);
     
     const dispatch = useDispatch();
+
+    const [showData,setShowData]=useState([]);
 
     // dispatch(Hell({id:1}));
     
@@ -46,7 +49,18 @@ function HomePage() {
             }
         )
     },[])
+    const excludedSpecialCharsRegex="[\\[\\]?*+|{}\\\\()@.\n\r]";
+    useEffect(()=>{
+        if(search.search(excludedSpecialCharsRegex)==-1)
+        {
+            setShowData(data?.filter(val =>{
+                //console.log("Dekh",val.username)
+                return val.username?.toLowerCase().match(search.toLowerCase()) || val.name?.toLowerCase().match(search.toLowerCase()) || val.email?.toLowerCase().match(search.toLowerCase()) || val.phone?.toLowerCase().match(search.toLowerCase());
+            }));
+        }
+    },[search])
 
+    // console.log("Hey",showData,"batao")
 
     const handleDelete = (index) =>{
 
@@ -118,12 +132,12 @@ function HomePage() {
         <div style={{...opacity}}>
             <h2>My Customers</h2>
             <br />
-            <Input placeholder="Search" />
+            <Input placeholder="Search" name="search" value={search} onChange={event => setSearch(event.target.value)}/>
             <br />
             <br />
             <Link to='/adduser'><Button type="primary" onClick={handleClick}>Add User</Button></Link>
 
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={showData} />
 
             <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
             footer={[<Button onClick={handleCancel}>Noo, Cancel</Button>, <Button type="primary" onClick={handleOk}>Yes, Delete</Button>]}>
