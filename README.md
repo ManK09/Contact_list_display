@@ -1,3 +1,43 @@
+ # Kindly Note: Since the data is being retrieved from a mock API (reqres) which does not allow actual changes on the server, the web app will not work on refresh on any page. One of the reasons also is that the redux store will lose the data on refresh.
+# Though the homepage and add user page were not breaking on refresh, they are breaking on the deployed site on refreshing the page.
+# Also the credentials to login and register are fixed that are allowed by API as discussed.
+
+
+# 'Alert' has been used to show succeess or failure return from API calls.
+
+
+Test Cases:
+
+1) User do not enter  login or password  => alert comes with email / password required.
+2) User enteres invalid crendentials  => alert comes with "User not found"
+3) User clicks Register button =>  user redirects to register page
+4) On registration page, user do not enter either  email or password => alert comes with email/ password required.
+5) On registration page, user enteres credentials and clicks on register page => alert comes as "user registered" and gets redirected to login page.
+6) On login page, user enters valid credentials and presses login button => alert comes "User Logged In" and redirects to Home Page.
+
+On Homepage,
+7) user searches something => list corresponding to searched value is displayed.
+8) user clicks Add user button => Redirects to Add User page.
+9) user clicks Edit user button => redirects to Edit User page.
+10) user clicks Delete Button => Pop Up comes up asking confirmation
+
+In Delete Pop-up
+11) user presses "Noo, cancel" => pop up closes and event gets cancelled.
+12) User presses "Yes, Delete" => pop up closes and entry is deleted.
+
+On Add User Page,
+13) User clicks Submit button without entering Name/Username/email => alert comes with "Email/Username/Name required"
+14) USer clicks Submit button after entering the details => alert comes as "Entry added" and user gets redirected to home page with an entry added in the display list.
+
+On Edit User Page,
+15) User clicks Submit button without entering Name/Username/email => alert comes with "Email/Username/Name required"
+16) USer clicks Submit button after entering the details =>  user gets redirected to home page with the details updated in the display list.
+
+
+# 17) User refreshes page => the site breaks
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
